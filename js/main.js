@@ -36,7 +36,22 @@ const projects = [
         images: [
             "assets/images/robot (1).png",
             "assets/images/robot (2).png",
-            "assets/images/robot (3).png"
+            "assets/images/robot (3).png",
+            "assets/images/robot (4).png",
+            "assets/images/robot (5).png",
+            "assets/images/robot (6).png",
+            "assets/images/robot (7).png",
+            "assets/images/robot (8).png",
+            "assets/images/robot (9).png",
+            "assets/images/robot (10).png",
+            "assets/images/robot (11).png",
+            "assets/images/robot (12).png",
+            "assets/images/robot (13).png",
+            "assets/images/robot (14).png",
+            "assets/images/robot (15).png",
+            "assets/images/robot (16).png",
+            "assets/images/robot (17).png",
+            "assets/images/robot (18).png"
         ]
     },
     {
@@ -48,7 +63,22 @@ const projects = [
         images: [
             "assets/images/robot (1).png",
             "assets/images/robot (2).png",
-            "assets/images/robot (3).png"
+            "assets/images/robot (3).png",
+            "assets/images/robot (4).png",
+            "assets/images/robot (5).png",
+            "assets/images/robot (6).png",
+            "assets/images/robot (7).png",
+            "assets/images/robot (8).png",
+            "assets/images/robot (9).png",
+            "assets/images/robot (10).png",
+            "assets/images/robot (11).png",
+            "assets/images/robot (12).png",
+            "assets/images/robot (13).png",
+            "assets/images/robot (14).png",
+            "assets/images/robot (15).png",
+            "assets/images/robot (16).png",
+            "assets/images/robot (17).png",
+            "assets/images/robot (18).png"
         ]
     },
     {
@@ -60,7 +90,22 @@ const projects = [
         images: [
             "assets/images/robot (1).png",
             "assets/images/robot (2).png",
-            "assets/images/robot (3).png"
+            "assets/images/robot (3).png",
+            "assets/images/robot (4).png",
+            "assets/images/robot (5).png",
+            "assets/images/robot (6).png",
+            "assets/images/robot (7).png",
+            "assets/images/robot (8).png",
+            "assets/images/robot (9).png",
+            "assets/images/robot (10).png",
+            "assets/images/robot (11).png",
+            "assets/images/robot (12).png",
+            "assets/images/robot (13).png",
+            "assets/images/robot (14).png",
+            "assets/images/robot (15).png",
+            "assets/images/robot (16).png",
+            "assets/images/robot (17).png",
+            "assets/images/robot (18).png"
         ]
     },
     {
@@ -72,7 +117,22 @@ const projects = [
         images: [
             "assets/images/robot (1).png",
             "assets/images/robot (2).png",
-            "assets/images/robot (3).png"
+            "assets/images/robot (3).png",
+            "assets/images/robot (4).png",
+            "assets/images/robot (5).png",
+            "assets/images/robot (6).png",
+            "assets/images/robot (7).png",
+            "assets/images/robot (8).png",
+            "assets/images/robot (9).png",
+            "assets/images/robot (10).png",
+            "assets/images/robot (11).png",
+            "assets/images/robot (12).png",
+            "assets/images/robot (13).png",
+            "assets/images/robot (14).png",
+            "assets/images/robot (15).png",
+            "assets/images/robot (16).png",
+            "assets/images/robot (17).png",
+            "assets/images/robot (18).png"
         ]
     }
 ];
