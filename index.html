@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - 3D & Electrical Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">M. Zuhayr Ramadhan</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                 <!--<li><a href="#about">About</a></li> -->
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <button class="nav-toggle" aria-label="Toggle menu" tabindex="-1">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero">
+
+            <!-- FOTO (LAYER BELAKANG, KE-CROP HERO) -->
+            <div class="profile-section">
+                <img 
+                    src="assets/images/asdasasd.png"
+                    alt="Foto Profil John Doe"
+                    class="profile-photo"
+                />
+            </div>
+
+            <!-- KONTEN TEKS -->
+            <div class="hero-content">
+                <div class="strengths-weaknesses-section">
+                    <h2>About Me</h2>
+                    <p>I am a Mechatronics Engineering student at Politeknik Negeri Ujung Pandang with a passionate in 3D CAD, control systems, and industrial automation. I am a fast learner and highly adaptable to new environments. Through my organizational experience, I have strengthened my communication, managerial, and technical skills. I am committed to applying my knowledge and capabilities across academic, professional, and social environments.</p>
+                    <br>  </br>
+                    <div class="skills-wrapper">
+                        <h3>SKILLS</h3>
+                        <ul>
+                            <li>Mechanical design with Autodesk Inventor, SolidWorks, and Autodesk Fusion 360.</li>
+                            <li>Electrical schematic and PCB design using Fusion 360 and Proteus.</li>
+                            <li>PLC ladder programming using Omron, Outseal, LS Electric, and Siemens.</li>
+                            <li>Microcontroller programming for embedded systems using Arduino and ESP32.</li>
+                            <li>Technical reporting and project documentation for academic and project-based work.</li>
+                            <li>Microsoft Office proficiency: Word, Excel, and PowerPoint.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!--
+    <section id="about">
+        <h2>About Me</h2>
+        <p>As a passionate 3D web engineer and electrical specialist, I blend creativity with technical precision to build immersive digital experiences and innovative hardware solutions. With over 5 years in the field, I've mastered tools like Blender, Three.js, and embedded systems to bring ideas to life.</p>
+        <ul class="skills">
+            <li>3D Design & Modeling</li>
+            <li>Electrical Engineering & Automation</li>
+            <li>Embedded Systems & IoT</li>
+            <li>Web Development (HTML/CSS/JS)</li>
+        </ul>
+    </section> -->
+
+    <section id="portfolio">
+        <h2>Project Portfolio</h2>
+        <div id="projects-container"></div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required aria-describedby="name-error">
+            <span id="name-error" class="error-message" aria-live="polite"></span>
+            <input type="email" id="email" placeholder="Your Email" required aria-describedby="email-error">
+            <span id="email-error" class="error-message" aria-live="polite"></span>
+            <textarea id="message" placeholder="Your Message" required aria-describedby="message-error"></textarea>
+            <span id="message-error" class="error-message" aria-live="polite"></span>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <p>Email: john.doe@example.com</p>
+            <p>WhatsApp: +1234567890</p>
+            <p>LinkedIn: linkedin.com/in/johndoe</p>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+
+            <div class="modal-left">
+                <div id="modal-3d-viewer" class="viewer"></div>
+            </div>
+
+            <div class="modal-right">
+                <div id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMAGE LIGHTBOX (FULLSCREEN) -->
+    <div id="image-lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" />
+    </div>
+
+
+    <script src="js/three-viewer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
