@@ -1,138 +1,76 @@
 // Data Projects
 const projects = [
     {
-        title: "3D Robotic Arm Model",
-        description: "A detailed 3D model of a robotic arm for automation simulations, optimized for web rendering.",
-        tools: "Blender, Three.js",
+        title: "Rice Planting Robot",
+        description: "This rice planting robot is designed to assist in the process of transplanting rice seedlings. Currently, the robot is manually controlled via a remote control and operates using electrical power. In the future, it is planned to be fully automated using computer vision and machine learning technologies.",
+        tools: "Autodesk Inventor",
         modelPath: "assets/models/Robot Penanam Padi.glb",
-        details: "This project involved creating a fully articulated robotic arm with realistic physics simulation. Used for training AI in manufacturing environments.",
+        details: "I designed the 3D mechanical model of the rice planting robot using Autodesk Inventor, and 2D technical drawings for the project.",
         images: [
-            "assets/images/robot (1).png",
-            "assets/images/robot (2).png",
-            "assets/images/robot (3).png",
-            "assets/images/robot (4).png",
-            "assets/images/robot (5).png",
-            "assets/images/robot (6).png",
-            "assets/images/robot (7).png",
-            "assets/images/robot (8).png",
-            "assets/images/robot (9).png",
-            "assets/images/robot (10).png",
-            "assets/images/robot (11).png",
-            "assets/images/robot (12).png",
-            "assets/images/robot (13).png",
-            "assets/images/robot (14).png",
-            "assets/images/robot (15).png",
-            "assets/images/robot (16).png",
-            "assets/images/robot (17).png",
-            "assets/images/robot (18).png"
+            "assets/images/pnanampadi (1).png",
+            "assets/images/pnanampadi (2).png",
+            "assets/images/pnanampadi (3).png"
         ]
     },
     {
-        title: "Electrical Circuit Board Design",
-        description: "Custom PCB design for IoT device, including embedded sensors and automation logic.",
-        tools: "KiCad, Arduino",
+        title: "Peanut Chopper",
+        description: "This project involves designing a peanut chopper machine aimed at efficiently chopping peanuts into smaller pieces. The design focuses on optimizing mechanical performance, safety, and ease of operation for small-scale food processing.",
+        tools: "Autodesk Inventor",
         modelPath: "assets/models/Pencacah Kacang.glb",
-        details: "Designed a low-power IoT board with Wi-Fi connectivity and sensor integration for smart home applications.",
+        details: "I designed the 3D mechanical model of the Peanut Chopper using Autodesk Inventor.",
         images: [
-            "assets/images/robot (1).png",
-            "assets/images/robot (2).png",
-            "assets/images/robot (3).png",
-            "assets/images/robot (4).png",
-            "assets/images/robot (5).png",
-            "assets/images/robot (6).png",
-            "assets/images/robot (7).png",
-            "assets/images/robot (8).png",
-            "assets/images/robot (9).png",
-            "assets/images/robot (10).png",
-            "assets/images/robot (11).png",
-            "assets/images/robot (12).png",
-            "assets/images/robot (13).png",
-            "assets/images/robot (14).png",
-            "assets/images/robot (15).png",
-            "assets/images/robot (16).png",
-            "assets/images/robot (17).png",
-            "assets/images/robot (18).png"
+
         ]
     },
     {
-        title: "Futuristic Drone Prototype",
-        description: "3D design and electrical integration for a high-tech drone with autonomous flight capabilities.",
-        tools: "Fusion 360, ESP32",
+        title: "Smart Vertical Komposter",
+        description: "The Smart Vertical Komposter is a three-stage system designed to convert tofu waste into maggot feed. First, the tofu residue is filtered, then transferred into a fermentor for mixing and fermentation, and finally, the fermented material is processed into nutritious feed for maggots.",
+        tools: "Autodesk Inventor, Microsoft Excel",
         modelPath: "assets/models/Fermentor Okara.glb",
-        details: "Prototyped a quadcopter with GPS navigation and obstacle avoidance, powered by ESP32 microcontroller.",
+        details: "I designed the 3D mechanical model of the Smart Vertical Komposter using Autodesk Inventor, also developed the cost analysis and design plan for the fabrication of the device.",
         images: [
-            "assets/images/robot (1).png",
-            "assets/images/robot (2).png",
-            "assets/images/robot (3).png",
-            "assets/images/robot (4).png",
-            "assets/images/robot (5).png",
-            "assets/images/robot (6).png",
-            "assets/images/robot (7).png",
-            "assets/images/robot (8).png",
-            "assets/images/robot (9).png",
-            "assets/images/robot (10).png",
-            "assets/images/robot (11).png",
-            "assets/images/robot (12).png",
-            "assets/images/robot (13).png",
-            "assets/images/robot (14).png",
-            "assets/images/robot (15).png",
-            "assets/images/robot (16).png",
-            "assets/images/robot (17).png",
-            "assets/images/robot (18).png"
+            "assets/images/okara.png"
         ]
     },
     {
-        title: "ASDASDASD",
-        description: "3D desigan and electrical integration for a high-tech drone with autonomous flight capabilities.",
-        tools: "Fusion 360, ESP32",
+        title: "Mini Dozer X Excavator Toy",
+        description: "This project involves designing a realistic Dozer X Excavator toy, focusing on both mechanical functionality and aesthetic appeal. The design emphasizes movable parts, durability, and an engaging user experience, making it suitable for interactive play and educational purposes.",
+        tools: "Autodesk Inventor",
         modelPath: "assets/models/Dozer X Excavator Toy.glb",
-        details: "Prototyped a quadcoptaer with GPS navigation and obstacle avoidance, powered by ESP32 microcontroller.",
+        details: "I designed the 3D mechanical model of the Mini Dozer X Excavator Toy using Autodesk Inventor.",
         images: [
-            "assets/images/robot (1).png",
-            "assets/images/robot (2).png",
-            "assets/images/robot (3).png",
-            "assets/images/robot (4).png",
-            "assets/images/robot (5).png",
-            "assets/images/robot (6).png",
-            "assets/images/robot (7).png",
-            "assets/images/robot (8).png",
-            "assets/images/robot (9).png",
-            "assets/images/robot (10).png",
-            "assets/images/robot (11).png",
-            "assets/images/robot (12).png",
-            "assets/images/robot (13).png",
-            "assets/images/robot (14).png",
-            "assets/images/robot (15).png",
-            "assets/images/robot (16).png",
-            "assets/images/robot (17).png",
-            "assets/images/robot (18).png"
         ]
     },
     {
-        title: "Lorem Ipsum Project",
-        description: "Lorem Ipsuam sit Dolor.",
-        tools: "Fusion 360, ESP32",
+        title: "Smart Scheduled Chicken Feeder",
+        description: "This project is an automated chicken feeder system designed to dispense feed at scheduled times. The device delivers feed daily at 7 AM and 4 PM, ensuring consistent nutrition for the chickens while reducing manual labor.",
+        tools: "Autodesk Inventor, Fusion 360, Arduino IDE",
         modelPath: "assets/models/Smart Chicken Feeder.glb",
-        details: "Protot yped a quadcopter with GPS navigation and obstacle avoidance, powered by ESP32 microcontroller.",
+        details: "I designed designed the mechanical model, 2D technical drawings for the project, creating the electrical schematics and system, and programming the control system for the automated chicken feeder.",
         images: [
-            "assets/images/robot (1).png",
-            "assets/images/robot (2).png",
-            "assets/images/robot (3).png",
-            "assets/images/robot (4).png",
-            "assets/images/robot (5).png",
-            "assets/images/robot (6).png",
-            "assets/images/robot (7).png",
-            "assets/images/robot (8).png",
-            "assets/images/robot (9).png",
-            "assets/images/robot (10).png",
-            "assets/images/robot (11).png",
-            "assets/images/robot (12).png",
-            "assets/images/robot (13).png",
-            "assets/images/robot (14).png",
-            "assets/images/robot (15).png",
-            "assets/images/robot (16).png",
-            "assets/images/robot (17).png",
-            "assets/images/robot (18).png"
+            "assets/images/pakanayam (1).png",
+            "assets/images/pakanayam (2).jpeg",
+            "assets/images/pakanayam (1).jpeg",
+            "assets/images/pakanayam (6).jpeg",
+            "assets/images/pakanayam (3).jpeg",
+            "assets/images/pakanayam (4).jpeg",
+            "assets/images/pakanayam (5).jpeg"
+        ]
+    },    
+    {
+        title: "Self Cleaning Water Filtration System",
+        description: "The Self-Cleaning Water Filtration System automatically flushes water through left and right valves for 20 minutes daily, then resumes delivering clean filtered water through the top valve.",
+        tools: "Autodesk Inventor, Fusion 360, Arduino IDE",
+        modelPath: "assets/models/Self Clean Water Filtration.glb",
+        details: "I designed designed the mechanical model, creating the electrical schematics and system, and programming the control system for the Self Cleaning Water Filtration System.",
+        images: [
+            "assets/images/filterair (1).png",
+            "assets/images/filterair (2).jpeg",
+            "assets/images/filterair (1).jpeg",
+            "assets/images/filterair (6).jpeg",
+            "assets/images/filterair (3).jpeg",
+            "assets/images/filterair (4).jpeg",
+            "assets/images/filterair (5).jpeg"
         ]
     }
 ];
@@ -186,42 +124,6 @@ toggle.addEventListener('click', () => {
     links.classList.toggle('show');
 });
 
-// Contact Form Handling with Validation
-document.getElementById('contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    let isValid = true;
-
-    // Clear previous errors
-    document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-    // Validate Name
-    if (!name) {
-        document.getElementById('name-error').textContent = 'Name is required.';
-        isValid = false;
-    }
-
-    // Validate Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
-        document.getElementById('email-error').textContent = 'Please enter a valid email.';
-        isValid = false;
-    }
-
-    // Validate Message
-    if (!message) {
-        document.getElementById('message-error').textContent = 'Message is required.';
-        isValid = false;
-    }
-
-    if (isValid) {
-        alert(`Thank you, ${name}! Your message has been sent. (Demo only - integrate backend for real sending)`);
-        e.target.reset();
-    }
-});
-
 // Modal for Project Details
 const modal = document.getElementById('project-modal');
 const modalViewer = document.getElementById('modal-3d-viewer');
@@ -238,7 +140,8 @@ projectsContainer.addEventListener('click', (e) => {
         modalBody.innerHTML = `
             <h3>${project.title}</h3>
             <p>${project.description}</p>
-            <p><strong>Details:</strong> ${project.details}</p>
+            <h2><strong>Tasks</strong></h2>
+            <p>${project.details}</p>
             <p class="tools">Tools: ${project.tools}</p>
 
             ${project.images ? `
@@ -323,3 +226,64 @@ function prevImg() {
     currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
     lightboxImg.src = currentImages[currentIndex];
 }
+
+const API_URL = "https://script.google.com/macros/s/AKfycbxebkQlQ4wM7MS4up03PALvJFgfS-a9Qwr_4ZTJBsgPQ919DVwfLe-WauMZcqPj_txYGA/exec";
+
+const form = document.getElementById('comment-form');
+const list = document.getElementById('comment-list');
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('c-name').value.trim();
+  const message = document.getElementById('c-message').value.trim();
+
+  if (!name || !message) return;
+
+  await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({ name, message })
+  });
+
+  form.reset();
+  loadComments();
+});
+
+const MY_NAME = "Juhers"; // Ganti dengan nama Anda
+
+async function loadComments() {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+
+    list.innerHTML = data
+    .slice()
+    .reverse()
+    .map(c => {
+        const isMe = c.name.trim().toLowerCase() === MY_NAME.toLowerCase();
+        const side = isMe ? 'right' : 'left';
+
+        const initials = c.name
+        .split(' ')
+        .slice(0, 2)
+        .map(w => w[0])
+        .join('');
+
+        return `
+        <div class="comment ${side}">
+            <div class="avatar">${initials}</div>
+            <div class="comment-content">
+            <strong>${c.name}</strong>
+            <p>${c.message}</p>
+            <small>${new Date(c.time).toLocaleString()}</small>
+            </div>
+        </div>
+        `;
+    })
+    .join('');
+
+
+}
+
+// load komentar pertama kali
+loadComments();
+

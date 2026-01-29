@@ -6,6 +6,8 @@
     <title>Portfolio - 3D & Electrical Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font Awesome tanpa integrity -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -21,6 +23,7 @@
                  <!--<li><a href="#about">About</a></li> -->
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#comments">Comments</a></li>
             </ul>
 
             <button class="nav-toggle" aria-label="Toggle menu" tabindex="-1">
@@ -83,23 +86,53 @@
         <div id="projects-container"></div>
     </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required aria-describedby="name-error">
-            <span id="name-error" class="error-message" aria-live="polite"></span>
-            <input type="email" id="email" placeholder="Your Email" required aria-describedby="email-error">
-            <span id="email-error" class="error-message" aria-live="polite"></span>
-            <textarea id="message" placeholder="Your Message" required aria-describedby="message-error"></textarea>
-            <span id="message-error" class="error-message" aria-live="polite"></span>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="contact-info">
-            <p>Email: john.doe@example.com</p>
-            <p>WhatsApp: +1234567890</p>
-            <p>LinkedIn: linkedin.com/in/johndoe</p>
+    <!-- Contact Section -->
+    <section id="contact" style="padding:50px 0; text-align:center; background:#050a07; color:#e6f5ec;">
+        <h2 style="font-size:2.5rem; margin-bottom:1rem;">Contact Me</h2>
+        <p style="margin-bottom:2rem; color:rgba(230,245,236,0.8);">Feel free to reach out via social media or email</p>
+        
+        <div id="contact-buttons" style="display:flex; justify-content:center; gap:4rem; flex-wrap:wrap; margin-top:1rem;">
+            <!-- Instagram -->
+            <a href="https://instagram.com/__zuhaaaa" target="_blank" class="circle-btn instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/m-zuhayr-ramadhan-751a4628a/" target="_blank" class="circle-btn linkedin">
+                <i class="fab fa-linkedin"></i>
+            </a>
+
+            <!-- Email -->
+            <a href="#" id="email-link" class="circle-btn email">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
     </section>
+
+    <section id="comments" class="comments-chat">
+        <div class="chat-container">
+
+            <!-- KIRI: INPUT KOMENTAR -->
+            <div class="chat-input-panel">
+            <h2>Leave a Comment</h2>
+
+            <form id="comment-form">
+                <input type="text" id="c-name" placeholder="Your name" required>
+                <textarea id="c-message" placeholder="Your comment" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+            </div>
+
+            <!-- KANAN: LIST KOMENTAR -->
+            <div class="chat-messages-panel">
+            <h2>Comments</h2>
+            <div id="comment-list"></div>
+            </div>
+
+        </div>
+    </section>
+
+
 
     <!-- MODAL -->
     <div id="project-modal" class="modal">
@@ -129,3 +162,17 @@
 </html>
 
 
+<script>
+  document.getElementById('email-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    var email = "zuhayr.ramadhan1805@gmail.com";
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      window.location.href = "mailto:" + email;
+    } else {
+      window.open("https://mail.google.com/mail/?view=cm&to=" + email, "_blank");
+    }
+  });
+</script>

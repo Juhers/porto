@@ -698,6 +698,275 @@ button:hover {
     font-size: 1rem;
 }
 
+
+
+/* ================= COMMENTS SECTION ================= */
+#comments {
+    width: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 212, 255, 0.1) 0%,
+        transparent 70%
+    );
+}
+
+.comments-chat {
+    width: 100%;
+}
+
+/* === LAYOUT KIRI (FORM) - KANAN (KOMENTAR) === */
+
+/* === SAMAKAN TINGGI KIRI & KANAN === */
+.chat-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 40px;
+    align-items: stretch; /* ⬅️ KUNCI UTAMA */
+}
+
+/* FORM KIRI */
+.chat-input-panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* KOMENTAR KANAN */
+.chat-messages-panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* LIST KOMENTAR ISI SISA TINGGI */
+#comment-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+
+/* ================= FORM KOMENTAR (KIRI) ================= */
+.chat-input-panel {
+    width: 100%;
+    background: var(--border-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(15px);
+    text-align: left;
+    position: sticky;
+    top: 120px;
+}
+
+.chat-input-panel h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+}
+
+/* FORM VERTICAL */
+#comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+#c-name {
+    width: 100%;
+}
+
+#c-message {
+    width: 100%;
+    min-height: 361px;
+    resize: vertical;
+}
+
+#comment-form button {
+    width: 100%;
+    padding: 14px 28px;
+    margin-top: 10px;
+}
+
+/* ================= KOMENTAR (KANAN) ================= */
+.chat-messages-panel {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.chat-messages-panel h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+/* LIST */
+#comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+/* ================= CHAT BUBBLE ================= */
+.comment {
+    display: flex;
+    gap: 14px;
+    max-width: 85%;
+    animation: fadeUp 0.35s ease;
+}
+
+.comment.left {
+    align-self: flex-start;
+}
+
+.comment.right {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+/* Avatar */
+.comment .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #099622, #06775c);
+    color: #fdfdfd;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+/* Bubble */
+.comment-content {
+    background: rgba(0, 255, 136, 0.08);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 14px 18px;
+    backdrop-filter: blur(10px);
+}
+
+.comment.right .comment-content {
+    background: linear-gradient(
+        135deg,
+        rgba(4, 195, 233, 0.64),
+        rgba(4, 176, 96, 0.75)
+    );
+}
+
+.comment-content strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: var(--accent-color);
+}
+
+.comment-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.comment-content small {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+/* Scrollbar */
+#comment-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#comment-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+    .chat-container {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-input-panel {
+        position: relative;
+        top: 0;
+    }
+
+    #comment-list {
+        max-height: none;
+    }
+}
+
+/* Tombol Lingkaran */
+.circle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;             /* Lebar tombol */
+  height: 120px;            /* Tinggi tombol */
+  border-radius: 50%;
+  font-size: 3rem;          /* Ukuran ikon */
+  color: #fff;
+  box-shadow: 0 0 20px rgb(255, 255, 255), 0 0 40px rgb(245, 245, 245);
+  transition: all 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Warna per platform */
+
+/* Hover Effect */
+.circle-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 6px 12px rgb(255, 255, 255);
+}
+
+/* Icon Style */
+.circle-btn i {
+  pointer-events: none; /* agar ikon tidak memblok klik */
+}
+
+.circle-btn {
+  box-shadow: 0 0 8px rgb(255, 255, 255), 0 0 20px rgba(0, 255, 136, 0.4);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.circle-btn:hover {
+  transform: translateY(-5px) scale(1.2);
+  box-shadow: 0 0 12px rgb(255, 255, 255), 0 0 25px rgba(0, 255, 136, 0.6);
+}
+
+.circle-btn {
+  text-decoration: none; /* hilangkan garis bawah */
+}
+
+
+/* Responsive */
+@media (max-width: 500px) {
+  .circle-btn { width: 50px; height: 50px; font-size:1.3rem; }
+}
+
+
 /* Media Query for 1143px width */
 @media (max-width: 1143px) {
 
