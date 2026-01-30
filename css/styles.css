@@ -251,6 +251,23 @@ section h2 {
     z-index: -1;
 }
 
+.hero::after{        
+    content: "";
+    position: absolute;
+    bottom: -200px; /* overlap biar gak keliatan garis patah */
+    left: 0;
+    width: 100%;
+    height: 500px; /* ⬅️ bikin lebih tinggi */
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 10%,
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.85) 90%,
+        rgba(0,0,0,1) 100%
+    );
+    z-index: -1;
+}
+
 .hero-content {
     margin-left: 36vw;
     padding: 210px 80px;
@@ -322,10 +339,10 @@ section h2 {
 #portfolio::before {
     content: '';
     position: absolute;
-    top: -20%;
+    top: 0%;
     left: 0;
     width: 100%;
-    height: 150%;
+    height: 200%;
     background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
     z-index: -1;
 }
@@ -359,9 +376,10 @@ section h2 {
 .project .viewer {
     width: 100%;
     height: 300px;
+    margin: 0 0 0 0; /* naik 50px */
     margin-bottom: 0;
     border: none;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 2px solid var(--glass-border);
     border-radius: 15px 15px 0 0;
 }
 
@@ -427,9 +445,9 @@ section h2 {
 .close-modal {
     position: absolute;
     top: 10px;
-    right: 20px;
-    color: var(--text-color);
-    font-size: 28px;
+    right: 30px;
+    color: #0e7123;
+    font-size: 40px;
     font-weight: bold;
     cursor: pointer;
     z-index: 1001;
@@ -437,7 +455,6 @@ section h2 {
 }
 
 .close-modal:hover {
-    color: var(--accent-color);
     transform: scale(1.2);
 }
 
@@ -449,6 +466,7 @@ section h2 {
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     border-right: 1px solid var(--glass-border);
+    border-radius: 20px;
     position: relative; /* Jika perlu untuk positioning anak */
 }
 
@@ -457,7 +475,7 @@ section h2 {
     height: 100%;
     max-width: 800px; /* Sesuai snippet Anda */
     max-height: 800px; /* Sesuai snippet Anda */
-    border-radius: 80px; /* Sesuai snippet Anda, untuk sudut melengkung */
+    border-radius: 10px;
     /* Opsional: Jika ingin memusatkan lebih ketat atau offset */
     position: relative; /* Atau absolute jika perlu */
     /* Contoh offset: Geser sedikit ke kanan atau atas */
@@ -619,12 +637,11 @@ section h2 {
 #contact::before {
     content: '';
     position: absolute;
-    top: -20%;
+    top: -100%;
     left: 0;
     width: 100%;
-    height: 150%;
+    height: 200%;
     background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-    z-index: -1;
 }
 
 #contact-form {
@@ -708,6 +725,15 @@ button:hover {
         rgba(0, 212, 255, 0.1) 0%,
         transparent 70%
     );
+}
+
+#comments::before {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
 }
 
 .comments-chat {
@@ -1014,7 +1040,6 @@ button:hover {
     }
 
     .hero {
-
         background: linear-gradient(
             135deg,
             var(--bg-color) 0%,
@@ -1023,35 +1048,43 @@ button:hover {
 
         position: relative;
         width: 100%;
-        height: 180vh;
-
-        margin-top: -120px;   /* ⬆️ naikkan hero */
+        height: auto;           /* otomatis mengikuti tinggi konten */
+        margin-top: -120px;     
         margin-left: calc(-50vw + 50%);
-
-        overflow: hidden;
-
-        mask-image: linear-gradient(
-            to bottom,
-            black 90%,
-            transparent 100%
-        );
-    }
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: -20%;
-        left: 0;
-        width: 100%;
-        height: 400%;
-        background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-        z-index: -1;
+        margin-bottom: 40px;
+        overflow: visible;      /* jangan potong konten */
+        mask-image: none;       /* matikan mask supaya teks tidak terpotong */
     }
 
     .hero-content {
         margin-left: 0;
         padding: 20px 40px;
         max-width: 100%;
+        z-index: 2;
+    }
+
+    .hero::before {
+        top: 0%;
+        width: 100%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        z-index: 2;
+    }
+
+    .hero::after{        
+        content: "";
+        position: absolute;
+        bottom: -50px; /* overlap biar gak keliatan garis patah */
+        left: 0;
+        width: 100%;
+        height: 180px; /* ⬅️ bikin lebih tinggi */
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0.5) 40%,
+            rgba(0,0,0,0.85) 80%,
+            rgba(0,0,0,1) 100%
+        );
         z-index: 2;
     }
 

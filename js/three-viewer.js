@@ -1,8 +1,9 @@
 // Three.js Viewer Function with Fixed Pivot & Rotation
-function initViewer(container, modelPath, autoRotate = true) {
+function initViewer(container, modelPath, autoRotate = true, interactive = false) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf4f6f8); // abu terang
 
+    // === CAMERA ===
     const camera = new THREE.PerspectiveCamera(
         60,
         container.clientWidth / container.clientHeight,
@@ -11,8 +12,10 @@ function initViewer(container, modelPath, autoRotate = true) {
     );
     camera.position.set(0, 1, 4);
 
+    // === RENDERER ===
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
@@ -31,16 +34,31 @@ function initViewer(container, modelPath, autoRotate = true) {
     // === CONTROLS ===
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.enablePan = false;
 
-    // === LOADING ===
+    if (interactive) {
+        // MODE MODAL → interaktif penuh
+        controls.enabled = true;
+        controls.enablePan = true;
+        controls.enableZoom = true;
+    } else {
+        // MODE PROJECT CARD → hanya autoRotate
+        controls.enabled = false; // disable semua interaksi
+        controls.enablePan = false;
+        controls.enableZoom = false;
+    }
+
+    // === LOADING SPINNER ===
     const loadingSpinner = document.createElement("div");
     loadingSpinner.className = "loading-spinner";
     container.appendChild(loadingSpinner);
 
-    // === PIVOT (WAJIB) ===
+    // === PIVOT ===
     const pivot = new THREE.Object3D();
     scene.add(pivot);
+
+    if (!interactive) {
+        pivot.position.y = 0.3; // naikkan sedikit
+    }
 
     // === LOAD MODEL ===
     const loader = new THREE.GLTFLoader();
@@ -57,7 +75,6 @@ function initViewer(container, modelPath, autoRotate = true) {
                 }
             });
 
-            // ⛔ JANGAN scene.add(model)
             pivot.add(model);
 
             // ★ WAJIB
@@ -71,20 +88,17 @@ function initViewer(container, modelPath, autoRotate = true) {
             model.position.sub(center);
 
             const maxDim = Math.max(size.x, size.y, size.z);
-            model.scale.setScalar(2.8 / maxDim);
+            if (maxDim > 0) model.scale.setScalar(2.8 / maxDim);
 
             model.updateWorldMatrix(true, true);
 
-            container.removeChild(loadingSpinner);
+            if (container.contains(loadingSpinner)) container.removeChild(loadingSpinner);
 
             // === ANIMATE ===
             function animate() {
                 requestAnimationFrame(animate);
 
-                // ✅ ROTASI PIVOT (BUKAN MODEL)
-                if (autoRotate) {
-                    pivot.rotation.y += 0.005;
-                }
+                if (autoRotate) pivot.rotation.y += 0.005;
 
                 controls.update();
                 renderer.render(scene, camera);
@@ -94,7 +108,7 @@ function initViewer(container, modelPath, autoRotate = true) {
         undefined,
         (err) => {
             console.error("GLTF error:", err);
-            container.removeChild(loadingSpinner);
+            if (container.contains(loadingSpinner)) container.removeChild(loadingSpinner);
         }
     );
 
@@ -105,7 +119,11 @@ function initViewer(container, modelPath, autoRotate = true) {
         renderer.setSize(container.clientWidth, container.clientHeight);
     });
     resizeObserver.observe(container);
+
+    return controls; // bisa dikontrol dari luar (misal aktifkan modal)
 }
+
+
 
 // Initialize Viewers on DOM Load
 document.addEventListener('DOMContentLoaded', () => {

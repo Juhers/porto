@@ -19,7 +19,7 @@ const projects = [
         modelPath: "assets/models/Pencacah Kacang.glb",
         details: "I designed the 3D mechanical model of the Peanut Chopper using Autodesk Inventor.",
         images: [
-
+            "assets/images/pencacah.png"
         ]
     },
     {
@@ -39,6 +39,7 @@ const projects = [
         modelPath: "assets/models/Dozer X Excavator Toy.glb",
         details: "I designed the 3D mechanical model of the Mini Dozer X Excavator Toy using Autodesk Inventor.",
         images: [
+            "assets/images/mainan.png"
         ]
     },
     {
@@ -62,7 +63,7 @@ const projects = [
         description: "The Self-Cleaning Water Filtration System automatically flushes water through left and right valves for 20 minutes daily, then resumes delivering clean filtered water through the top valve.",
         tools: "Autodesk Inventor, Fusion 360, Arduino IDE",
         modelPath: "assets/models/Self Clean Water Filtration.glb",
-        details: "I designed designed the mechanical model, creating the electrical schematics and system, and programming the control system for the Self Cleaning Water Filtration System.",
+        details: "I designed the mechanical model, creating the electrical schematics and system, and programming the control system for the Self Cleaning Water Filtration System.",
         images: [
             "assets/images/filterair (1).png",
             "assets/images/filterair (2).jpeg",
@@ -85,8 +86,6 @@ projects.forEach((project, index) => {
         <div class="viewer" data-model="${project.modelPath}"></div>
         <div class="project-content">
             <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <p class="tools">Tools: ${project.tools}</p>
         </div>
     `;
     projectsContainer.appendChild(projectDiv);
@@ -129,6 +128,12 @@ const modal = document.getElementById('project-modal');
 const modalViewer = document.getElementById('modal-3d-viewer');
 const modalBody = document.getElementById('modal-body');
 const closeModal = document.querySelector('.close-modal');
+let modalControls; // simpan controls modal secara global
+
+document.querySelectorAll('.viewer').forEach(v => {
+    const modelPath = v.dataset.model;
+    if (modelPath) initViewer(v, modelPath, true, false); // autoRotate, non-interaktif
+});
 
 projectsContainer.addEventListener('click', (e) => {
     const projectDiv = e.target.closest('.project');
@@ -136,39 +141,37 @@ projectsContainer.addEventListener('click', (e) => {
         const index = projectDiv.getAttribute('data-index');
         const project = projects[index];
         
-        // Isi deskripsi di sisi kanan
+        // Isi deskripsi modal
         modalBody.innerHTML = `
             <h3>${project.title}</h3>
             <p>${project.description}</p>
             <h2><strong>Tasks</strong></h2>
             <p>${project.details}</p>
             <p class="tools">Tools: ${project.tools}</p>
-
             ${project.images ? `
             <div class="modal-gallery">
-                ${project.images.map(img => `
-                    <img src="${img}" loading="lazy" alt="${project.title}">
-                `).join('')}
+                ${project.images.map(img => `<img src="${img}" loading="lazy" alt="${project.title}">`).join('')}
             </div>` : ''}
         `;
-        
-        // Inisialisasi 3D viewer di sisi kiri (hapus viewer lama jika ada)
-        modalViewer.innerHTML = ''; // Clear previous viewer
-        initViewer(modalViewer, project.modelPath, false);
-        
+
+        // Hapus viewer lama & init viewer baru
+        modalViewer.innerHTML = '';
+        modalControls = initViewer(modalViewer, project.modelPath, false, true); // return controls
+        if (modalControls) modalControls.enableZoom = true; // zoom aktif saat modal
+
         // Tampilkan modal
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
-        // Reset scroll modal-right ke atas
-        const modalRight = document.querySelector('.modal-right');
-        modalRight.scrollTop = 0;
-
+        document.body.style.overflow = 'hidden';
+        document.querySelector('.modal-right').scrollTop = 0;
     }
 });
 
 closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto'; // Restore scroll
+
+    // zoom nonaktif saat modal ditutup
+    if (modalControls) modalControls.enableZoom = false;
 });
 
 window.addEventListener('click', (e) => {
@@ -227,6 +230,9 @@ function prevImg() {
     lightboxImg.src = currentImages[currentIndex];
 }
 
+
+
+// ================= COMMENTS SECTION =================
 const API_URL = "https://script.google.com/macros/s/AKfycbxebkQlQ4wM7MS4up03PALvJFgfS-a9Qwr_4ZTJBsgPQ919DVwfLe-WauMZcqPj_txYGA/exec";
 
 const form = document.getElementById('comment-form');
