@@ -233,7 +233,7 @@ function prevImg() {
 
 
 // ================= COMMENTS SECTION =================
-const API_URL = "https://script.google.com/macros/s/AKfycbxebkQlQ4wM7MS4up03PALvJFgfS-a9Qwr_4ZTJBsgPQ919DVwfLe-WauMZcqPj_txYGA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzS8WtB-3LqSITtVFvgKCnAh7s-tAgemLG2fyEUtBp1twJxWO0Tyt_mfxjYZfLtLg7FwA/exec";
 
 const form = document.getElementById('comment-form');
 const list = document.getElementById('comment-list');
@@ -286,8 +286,6 @@ async function loadComments() {
         `;
     })
     .join('');
-
-
 }
 
 // load komentar pertama kali
