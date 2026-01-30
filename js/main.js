@@ -1,3 +1,26 @@
+let TOTAL_RESOURCES = 0;
+let LOADED_RESOURCES = 0;
+
+function resourceLoaded() {
+    LOADED_RESOURCES++;
+    if (LOADED_RESOURCES >= TOTAL_RESOURCES) {
+        finishLoading();
+    }
+}
+
+function finishLoading() {
+    const loader = document.getElementById("page-loader");
+    if (!loader) return;
+
+    loader.style.opacity = "0";
+    setTimeout(() => {
+        loader.remove();
+        document.body.classList.remove("preload");
+        document.body.classList.add("loaded");
+    }, 500);
+}
+
+
 // Data Projects
 const projects = [
     {
@@ -287,6 +310,21 @@ async function loadComments() {
     })
     .join('');
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const images = document.images;
+    TOTAL_RESOURCES += images.length;
+
+    [...images].forEach(img => {
+        if (img.complete) {
+            resourceLoaded();
+        } else {
+            img.addEventListener("load", resourceLoaded);
+            img.addEventListener("error", resourceLoaded);
+        }
+    });
+});
+
 
 // load komentar pertama kali
 loadComments();

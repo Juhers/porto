@@ -61,6 +61,7 @@ function initViewer(container, modelPath, autoRotate = true, interactive = false
     }
 
     // === LOAD MODEL ===
+    TOTAL_RESOURCES++;
     const loader = new THREE.GLTFLoader();
     loader.load(
         modelPath,
@@ -94,6 +95,8 @@ function initViewer(container, modelPath, autoRotate = true, interactive = false
 
             if (container.contains(loadingSpinner)) container.removeChild(loadingSpinner);
 
+            resourceLoaded(); // 🔥 PENTING
+
             // === ANIMATE ===
             function animate() {
                 requestAnimationFrame(animate);
@@ -109,6 +112,7 @@ function initViewer(container, modelPath, autoRotate = true, interactive = false
         (err) => {
             console.error("GLTF error:", err);
             if (container.contains(loadingSpinner)) container.removeChild(loadingSpinner);
+            resourceLoaded();
         }
     );
 

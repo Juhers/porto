@@ -636,6 +636,7 @@ section h2 {
 
 #contact::before {
     content: '';
+    pointer-events: none;
     position: absolute;
     top: -100%;
     left: 0;
@@ -1215,3 +1216,37 @@ header {
     text-align: left;
 }
 
+/* SEMBUNYIKAN WEBSITE */
+body.preload {
+    overflow: hidden;
+}
+
+body.preload main,
+body.preload header,
+body.preload section {
+    opacity: 0;
+}
+
+/* LOADER */
+#page-loader {
+    position: fixed;
+    inset: 0;
+    background: #050a07;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.loader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255,255,255,0.15);
+    border-top-color: #00e5ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
