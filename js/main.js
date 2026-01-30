@@ -3,6 +3,11 @@ let LOADED_RESOURCES = 0;
 
 function resourceLoaded() {
     LOADED_RESOURCES++;
+
+    const percent = Math.round((LOADED_RESOURCES / TOTAL_RESOURCES) * 100);
+    const percentEl = document.getElementById("loader-percent");
+    if (percentEl) percentEl.textContent = percent + "%";
+
     if (LOADED_RESOURCES >= TOTAL_RESOURCES) {
         finishLoading();
     }
@@ -20,6 +25,23 @@ function finishLoading() {
     }, 500);
 }
 
+function preloadImages(images = []) {
+    images.forEach(src => {
+        const img = new Image();
+
+        img.onload = () => {
+            console.log("✔ Loaded:", src);
+            resourceLoaded();
+        };
+
+        img.onerror = () => {
+            console.error("❌ Failed:", src);
+            resourceLoaded(); // TETAP HITUNG
+        };
+
+        img.src = src;
+    });
+}
 
 // Data Projects
 const projects = [
@@ -329,3 +351,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // load komentar pertama kali
 loadComments();
 
+const PORTFOLIO_IMAGES = projects.flatMap(p => p.images || []);
+TOTAL_RESOURCES = PORTFOLIO_IMAGES.length;
+
+if (TOTAL_RESOURCES === 0) {
+    finishLoading();
+} else {
+    preloadImages(PORTFOLIO_IMAGES);
+}
