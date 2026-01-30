@@ -20,7 +20,7 @@ const projects = [
         details: "I designed the 3D mechanical model of the Peanut Chopper using Autodesk Inventor.",
         images: [
             "assets/images/pencacah.png"
-        ]
+        ] 
     },
     {
         title: "Smart Vertical Komposter",
