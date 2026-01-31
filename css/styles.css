@@ -1,8 +1,8 @@
 /* CSS Variables for Modern Black & White with Accents */
 :root {
-    --bg-color: #050a07;                 /* hijau sangat gelap (nyaris hitam) */
-    --text-color: #e6f5ec;               /* putih kehijauan */
-    --accent-color: #ffffff;             /* neon green */
+    --bg-color: #050a07;             
+    --text-color: #e6f5ec;           
+    --accent-color: #ffffff;         
     --secondary-color: rgba(10, 30, 20, 0.8);
     --border-color: rgba(0, 0, 0, 0.388);
     --light-gray: #dff5ea;
@@ -57,7 +57,7 @@ html {
     justify-content: space-between;
     align-items: center;
 
-    pointer-events: auto; /* aktif lagi buat link */
+    pointer-events: auto;
 }
 
 .nav-toggle {
@@ -205,9 +205,9 @@ section h2 {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: center bottom; /* posisi di bawah */
+    object-position: center bottom; 
 
-    transform: translateY(80px); /* ubah: 0.7, 0.8, 0.9 dst */
+    transform: translateY(80px); 
 
     filter:
         brightness(0.3)
@@ -228,7 +228,7 @@ section h2 {
     width: 100%;
     height: 100vh;
 
-    margin-top: -120px;   /* ⬆️ naikkan hero */
+    margin-top: -120px;
 
     overflow: hidden;
 
@@ -254,10 +254,10 @@ section h2 {
 .hero::after{        
     content: "";
     position: absolute;
-    bottom: -200px; /* overlap biar gak keliatan garis patah */
+    bottom: -200px;
     left: 0;
     width: 100%;
-    height: 500px; /* ⬅️ bikin lebih tinggi */
+    height: 500px;
     background: linear-gradient(
         to bottom,
         rgba(0,0,0,0) 10%,
@@ -276,7 +276,7 @@ section h2 {
 }
 
 .strengths-weaknesses-section {
-    flex: 2; /* Kolom kanan, lebih lebar */
+    flex: 2; 
     text-align: justify;
 }
 
@@ -376,7 +376,7 @@ section h2 {
 .project .viewer {
     width: 100%;
     height: 300px;
-    margin: 0 0 0 0; /* naik 50px */
+    margin: 0 0 0 0; 
     margin-bottom: 0;
     border: none;
     border-bottom: 2px solid var(--glass-border);
@@ -429,16 +429,18 @@ section h2 {
 
 .modal-content {
     background: var(--glass-bg);
-    margin: 5% auto;
-    padding: 0;
+    margin: 2.5% auto;
+    padding: 5;
+
     border: 1px solid var(--glass-border);
     border-radius: 15px;
-    width: 90%;
-    max-width: 1400px;
-    height: 80%;
-    display: flex;
-    backdrop-filter: blur(10px);
     box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+
+    width: 90vw;
+    height: 90vh;
+
+    display: flex;
     overflow: hidden;
 }
 
@@ -467,22 +469,18 @@ section h2 {
     background: rgba(0, 0, 0, 0.5);
     border-right: 1px solid var(--glass-border);
     border-radius: 20px;
-    position: relative; /* Jika perlu untuk positioning anak */
+    position: relative;
 }
 
 .modal-left .viewer {
     width: 100%;
     height: 100%;
-    max-width: 800px; /* Sesuai snippet Anda */
-    max-height: 800px; /* Sesuai snippet Anda */
+    max-width: 800px; 
+    max-height: 800px; 
     border-radius: 10px;
-    /* Opsional: Jika ingin memusatkan lebih ketat atau offset */
-    position: relative; /* Atau absolute jika perlu */
-    /* Contoh offset: Geser sedikit ke kanan atau atas */
-    /* transform: translate(10px, -20px); */ /* Uncomment jika ingin offset */
-    /* Atau gunakan margin untuk spacing */
-    margin: auto; /* Memastikan centering otomatis */
-    box-shadow: var(--shadow); /* Tambahkan shadow untuk efek */
+    position: relative; 
+    margin: auto; 
+    box-shadow: var(--shadow);
 }
 
 .modal-right {
@@ -491,7 +489,7 @@ section h2 {
     display: flex;
     flex-direction: column;
 
-    justify-content: flex-start; /* ✅ FIX UTAMA */
+    justify-content: flex-start;
     overflow-y: auto;
 
     scroll-behavior: smooth;
@@ -536,6 +534,7 @@ section h2 {
     border-radius: 12px;
     cursor: pointer;
     opacity: 0.9;
+    transform: scale(1);
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
@@ -592,7 +591,7 @@ section h2 {
 }
 
 /* Responsive Modal */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .modal-content {
         flex-direction: column;
         height: 90%;
@@ -742,8 +741,6 @@ button:hover {
 }
 
 /* === LAYOUT KIRI (FORM) - KANAN (KOMENTAR) === */
-
-/* === SAMAKAN TINGGI KIRI & KANAN === */
 .chat-container {
     width: 100%;
     max-width: 1400px;
@@ -751,7 +748,7 @@ button:hover {
     display: grid;
     grid-template-columns: 420px 1fr;
     gap: 40px;
-    align-items: stretch; /* ⬅️ KUNCI UTAMA */
+    align-items: stretch;
 }
 
 /* FORM KIRI */
@@ -768,7 +765,6 @@ button:hover {
     flex-direction: column;
 }
 
-/* LIST KOMENTAR ISI SISA TINGGI */
 #comment-list {
     flex: 1;
     overflow-y: auto;
@@ -951,10 +947,10 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;             /* Lebar tombol */
-  height: 120px;            /* Tinggi tombol */
+  width: 120px;        
+  height: 120px;       
   border-radius: 50%;
-  font-size: 3rem;          /* Ukuran ikon */
+  font-size: 3rem;     
   color: #fff;
   box-shadow: 0 0 20px rgb(255, 255, 255), 0 0 40px rgb(245, 245, 245);
   transition: all 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -970,7 +966,7 @@ button:hover {
 
 /* Icon Style */
 .circle-btn i {
-  pointer-events: none; /* agar ikon tidak memblok klik */
+  pointer-events: none; 
 }
 
 .circle-btn {
@@ -984,7 +980,7 @@ button:hover {
 }
 
 .circle-btn {
-  text-decoration: none; /* hilangkan garis bawah */
+  text-decoration: none; 
 }
 
 
@@ -997,28 +993,21 @@ button:hover {
 /* Media Query for 1143px width */
 @media (max-width: 1143px) {
 
-    /* Hero text geser ke kiri agar tidak kepotong */
     .hero-content {
         margin-left: 0;
         padding: 100px 60px;
         z-index: 2;
     }
 
-    /* About Me naik ke atas */
     #about {
         position: relative;
         z-index: 1;
-        margin-top: -120px; /* ⬅️ naikkan about */
+        margin-top: -120px;
     }
 
-    /* Skills ikut naik mengikuti About Me */
     .skills-wrapper {
         position: relative;
         z-index: 1;
-
-        /* Geser dinamis:
-        layar besar → 400px
-        layar kecil → 0px */
         transform: translateX(clamp(0px, 35vw, 400px)) translateY(-20px);
 
         max-width: 56%;
@@ -1031,7 +1020,7 @@ button:hover {
 @media (max-width: 700px) {
 
     .strengths-weaknesses-section {
-        flex: 2; /* Kolom kanan, lebih lebar */
+        flex: 2; 
         text-align: left;
     }
 
@@ -1049,12 +1038,12 @@ button:hover {
 
         position: relative;
         width: 100%;
-        height: auto;           /* otomatis mengikuti tinggi konten */
+        height: auto;          
         margin-top: -120px;     
         margin-left: calc(-50vw + 50%);
         margin-bottom: 40px;
-        overflow: visible;      /* jangan potong konten */
-        mask-image: none;       /* matikan mask supaya teks tidak terpotong */
+        overflow: visible;    
+        mask-image: none;    
     }
 
     .hero-content {
@@ -1075,10 +1064,10 @@ button:hover {
     .hero::after{        
         content: "";
         position: absolute;
-        bottom: -50px; /* overlap biar gak keliatan garis patah */
+        bottom: -50px; 
         left: 0;
         width: 100%;
-        height: 180px; /* ⬅️ bikin lebih tinggi */
+        height: 180px; 
         background: linear-gradient(
             to bottom,
             rgba(0,0,0,0) 0%,
@@ -1090,15 +1079,15 @@ button:hover {
     }
 
     .skills-wrapper {
-        transform: none;        /* ❌ matikan geser */
-        max-width: 100%;        /* ✅ full lebar */
-        margin-top: 20px;       /* turun ke bawah */
+        transform: none;     
+        max-width: 100%;     
+        margin-top: 20px;    
     }
 
     .profile-section {
-        position: relative;   /* ⬅️ override */
-        width: 100%;          /* ⬅️ override */
-        height: 100vh;         /* ⬅️ override */
+        position: relative; 
+        width: 100%;        
+        height: 100vh;      
         max-height: 400px;
         mask-image: none;
     }
@@ -1106,10 +1095,10 @@ button:hover {
     .profile-section::after {
         content: "";
         position: absolute;
-        bottom: -1px; /* overlap biar gak keliatan garis patah */
+        bottom: -1px;
         left: 0;
         width: 100%;
-        height: 200px; /* ⬅️ bikin lebih tinggi */
+        height: 200px;
         background: linear-gradient(
             to bottom,
             rgba(0,0,0,0) 0%,
@@ -1257,4 +1246,47 @@ body.preload section {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+.viewer-3d {
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;       
+  background: #111;
+  border-radius: 12px;
+
+  margin: 0;           
+  overflow: hidden;
+}
+
+.modal-left img,
+.modal-image {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+    margin: auto;
+    display: block;
+}
+
+.project-viewer {
+  width: 100%;
+  height: 280px;
+  background: #111;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ganti contain kalau mau full image */
+  border-radius: 12px;
 }
