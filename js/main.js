@@ -104,6 +104,29 @@ const projects = [
     }
 ];
 
+const experiences = [
+    {
+        title: "Sulsel Student CAD Competition Committee",
+        description: "Served as a committee member in the Equipment Division for the Sulsel Student CAD Competition. Responsible for preparing and managing competition equipment and facilities. Also acted as a training assistant during pre-competition sessions, guiding participants through basic drawing functions and fundamental 3D modeling techniques using SolidWorks to ensure readiness for the competition.",
+        image: "assets/images/lomba CAD.jpeg"
+    },
+    {
+        title: "National CAD-CAM Competition 2025",
+        description: "Participated in the National CAD-CAM Competition 2025 under the 3D Modelling category, competing against 63 participants nationwide. Achieved 28th place out of 63 participants in the preliminary round, demonstrating solid 3D modeling skills, design accuracy, and effective time management in a competitive environment.",
+        image: "assets/images/lomba.png"
+    },
+    {
+        title: "PLC-SCADA Competition Committee - Mechatronics Day 8th",
+        description: "Served as a committee member for the PLC-SCADA Competition at the 8th Mechatronics Day event. Responsible for preparing competition requirements and supervising participants throughout the contest to ensure compliance with regulations, safety, and smooth execution of the event.",
+        image: "assets/images/lomba PLC.jpeg"
+    },
+    {
+        title: "Robotics Implementation for High School Education - PKM PNUP",
+        description: "Contributed to a community service (PKM) program by developing and improving an educational robotics system for high school students. Worked as a robotics technician handling both software and hardware, including enhancing a voice-command robot to recognize multiple users and troubleshooting power circuitry to ensure safe and reliable classroom operation. The project supported hands-on STEM learning and increased student engagement in robotics technology.",
+        image: "assets/images/pkm.jpeg"
+    }
+];
+
 let TOTAL_RESOURCES = 0;
 let LOADED_RESOURCES = 0;
 
@@ -129,24 +152,6 @@ function finishLoading() {
         document.body.classList.remove("preload");
         document.body.classList.add("loaded");
     }, 500);
-}
-
-function preloadImages(images = []) {
-    images.forEach(src => {
-        const img = new Image();
-
-        img.onload = () => {
-            console.log("✔ Loaded:", src);
-            resourceLoaded();
-        };
-
-        img.onerror = () => {
-            console.error("❌ Failed:", src);
-            resourceLoaded(); // TETAP HITUNG
-        };
-
-        img.src = src;
-    });
 }
 
 function sendDiscordWebhook(nama, komentar) {
@@ -219,6 +224,92 @@ function is3DModel(path) {
 function isImage(path) {
   return /\.(png|jpe?g|webp)$/i.test(path);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const experienceContainer = document.getElementById('experience-container');
+
+    if (!experienceContainer) return;
+
+    experiences.forEach(exp => {
+        const card = document.createElement('div');
+        card.className = 'experience-card';
+
+        card.innerHTML = `
+            <img src="${exp.image}" alt="${exp.title}" class="experience-image">
+            <div class="experience-content">
+                <h3>${exp.title}</h3>
+                <p>${exp.description}</p>
+            </div>
+        `;
+
+        experienceContainer.appendChild(card);
+    });
+
+    // ================= LIGHTBOX =================
+    const lightbox = document.getElementById('experience-lightbox');
+    const lightboxImg = document.getElementById('experience-lightbox-img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // klik gambar
+    experienceContainer.addEventListener('click', e => {
+        const img = e.target.closest('.experience-image');
+        if (!img) return;
+
+        lightboxImg.src = img.src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden'; // disable scroll
+    });
+
+    // klik close
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    });
+
+    // klik background
+    lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+
+
+// ================= VIEWER 3D OPTIMIZATION =================
+const viewers = document.querySelectorAll('.viewer');
+
+const viewerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const el = entry.target;
+        const modelPath = el.dataset.model;
+
+        if (!modelPath) return;
+
+        if (entry.isIntersecting) {
+            // Jika visible → init viewer jika belum ada
+            if (!el.viewerInstance) {
+                // autoRotate pelan, non-interaktif di main page
+                el.viewerInstance = initViewer(el, modelPath, true, false);
+                if (el.viewerInstance) el.viewerInstance.autoRotateSpeed = 0.1; // pelan banget
+                console.log("✔ Viewer loaded:", modelPath);
+            }
+        } else {
+            // Jika tidak visible → dispose viewer jika ada
+            if (el.viewerInstance && el.viewerInstance.dispose) {
+                el.viewerInstance.dispose();
+                el.viewerInstance = null;
+                console.log("❌ Viewer disposed:", modelPath);
+            }
+        }
+    });
+}, {
+    threshold: 0.1 // 10% visible dianggap tampil
+});
+
+// Observe semua viewer
+viewers.forEach(v => viewerObserver.observe(v));
+
 
 
 // Render Projects Dynamically
@@ -297,13 +388,8 @@ const modalBody = document.getElementById('modal-body');
 const closeModal = document.querySelector('.close-modal');
 let modalControls; // simpan controls modal secara global
 
-document.querySelectorAll('.viewer').forEach(v => {
-    const modelPath = v.dataset.model;
-    if (modelPath) initViewer(v, modelPath, true, false); // autoRotate, non-interaktif
-});
 
 const modalLeft = document.querySelector('.modal-left');
-
 projectsContainer.addEventListener('click', (e) => {
     const projectDiv = e.target.closest('.project');
     if (projectDiv) {
@@ -497,29 +583,6 @@ async function loadComments() {
     .join('');
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const images = document.images;
-    TOTAL_RESOURCES += images.length;
-
-    [...images].forEach(img => {
-        if (img.complete) {
-            resourceLoaded();
-        } else {
-            img.addEventListener("load", resourceLoaded);
-            img.addEventListener("error", resourceLoaded);
-        }
-    });
-});
-
-
 // load komentar pertama kali
 loadComments();
-
-const PORTFOLIO_IMAGES = projects.flatMap(p => p.images || []);
-TOTAL_RESOURCES = PORTFOLIO_IMAGES.length;
-
-if (TOTAL_RESOURCES === 0) {
-    finishLoading();
-} else {
-    preloadImages(PORTFOLIO_IMAGES);
-}
+resourceLoaded();
