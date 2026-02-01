@@ -108,7 +108,7 @@ const experiences = [
     {
         title: "Sulsel Student CAD Competition Committee",
         description: "Served as a committee member in the Equipment Division for the Sulsel Student CAD Competition. Responsible for preparing and managing competition equipment and facilities. Also acted as a training assistant during pre-competition sessions, guiding participants through basic drawing functions and fundamental 3D modeling techniques using SolidWorks to ensure readiness for the competition.",
-        image: "assets/images/lomba CAD.jpeg"
+        image: "assets/images/Lomba CAD.jpeg"
     },
     {
         title: "National CAD-CAM Competition 2025",
