@@ -283,6 +283,7 @@ async function trackVisitor() {
     })
 }
 
+
 window.addEventListener('load', trackVisitor);
 
 function sendDiscordWebhook(nama, komentar) {
