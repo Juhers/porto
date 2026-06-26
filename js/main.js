@@ -281,8 +281,6 @@ async function trackVisitor() {
             }]
         })
     })
-    .then(() => console.log("✅ Visitor data + IP terkirim"))
-    .catch(err => console.error("❌ Gagal kirim:", err));
 }
 
 window.addEventListener('load', trackVisitor);
