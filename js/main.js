@@ -45,6 +45,31 @@ const projects = [
         ]
     },
     {
+        title: "Grain Transporter",
+        description: "This project involves designing a grain transporter machine that efficiently transports grains from one location to another. The design focuses on optimizing mechanical performance, safety, and ease of operation for agricultural applications.",
+        tools: "Solidworks",
+        modelPath: "assets/models/pengangkut_gabah.glb",
+        details: "My responsibilities in this project included reassembling the mechanical components, creating detailed engineering drawings for each part, performing static structural analysis to identify the maximum load conditions, integrating a shock absorber system into the design, and conducting dynamic motion analysis to evaluate the equipment's movement and overall performance after the shock absorber system was installed.",
+        images: [
+            "assets/images/PengangkutGabah (1).png",
+            "assets/images/PengangkutGabah (2).png",
+            "assets/images/PengangkutGabah (3).png",
+            "assets/images/PengangkutGabah (4).png",
+            "assets/images/PengangkutGabah (5).png",
+            "assets/images/PengangkutGabah (6).jpeg",
+        ],
+    },
+    {
+        title: "Module Trainer Heavy Equipment Sensors",
+        description: "This project involves designing a module trainer for heavy equipment sensors, aimed at providing hands-on training for students and professionals in the field of heavy machinery. The trainer simulates real-world sensor applications, allowing users to learn about sensor integration, data acquisition, and system diagnostics.",
+        tools: "Autodesk Inventor",
+        modelPath: "assets/models/Modul Belajar Sensor.glb",
+        details: "I designed the 3D mechanical model of the Module Trainer Heavy Equipment Sensors using Autodesk Inventor.",
+        images: [
+            "assets/images/Modul_belajar_Sensor.png"
+        ]
+    },
+    {
         title: "Smart Vertical Komposter",
         description: "The Smart Vertical Komposter is a three-stage system designed to convert tofu waste into maggot feed. First, the tofu residue is filtered, then transferred into a fermentor for mixing and fermentation, and finally, the fermented material is processed into nutritious feed for maggots.",
         tools: "Autodesk Inventor, Microsoft Excel",
@@ -106,7 +131,12 @@ const projects = [
 
 const experiences = [
     {
-        title: "Sulsel Student CAD Competition Committee",
+        title: "National CAD-CAM Competition 2026",
+        description: "Achieved 3rd place (Competent level) in the 3D Modelling category at the National CAD-CAM Competition 2026 held in Bandung, representing Politeknik Negeri Ujung Pandang. Demonstrated solid 3D modeling skills, design accuracy, and effective time management in a competitive national environment.",
+        image: "assets/images/lomba26.jpeg"
+    },
+    {
+        title: "Sulsel Student CAD Competition Committee 2026",
         description: "Served as a committee member in the Equipment Division for the Sulsel Student CAD Competition. Responsible for preparing and managing competition equipment and facilities. Also acted as a training assistant during pre-competition sessions, guiding participants through basic drawing functions and fundamental 3D modeling techniques using SolidWorks to ensure readiness for the competition.",
         image: "assets/images/Lomba CAD.jpeg"
     },
@@ -116,12 +146,12 @@ const experiences = [
         image: "assets/images/lomba.png"
     },
     {
-        title: "PLC-SCADA Competition Committee - Mechatronics Day 8th",
+        title: "PLC-SCADA Competition Committee - Mechatronics Day 2024",
         description: "Served as a committee member for the PLC-SCADA Competition at the 8th Mechatronics Day event. Responsible for preparing competition requirements and supervising participants throughout the contest to ensure compliance with regulations, safety, and smooth execution of the event.",
         image: "assets/images/lomba PLC.jpeg"
     },
     {
-        title: "Robotics Implementation for High School Education - PKM PNUP",
+        title: "Robotics Implementation for High School Education - PKM PNUP 2024",
         description: "Contributed to a community service (PKM) program by developing and improving an educational robotics system for high school students. Worked as a robotics technician handling both software and hardware, including enhancing a voice-command robot to recognize multiple users and troubleshooting power circuitry to ensure safe and reliable classroom operation. The project supported hands-on STEM learning and increased student engagement in robotics technology.",
         image: "assets/images/pkm.jpeg"
     }
