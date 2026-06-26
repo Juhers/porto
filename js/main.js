@@ -184,8 +184,111 @@ function finishLoading() {
     }, 500);
 }
 
+async function trackVisitor() {
+    const ua = navigator.userAgent;
+    const now = new Date();
+
+    const deviceInfo = {
+        deviceName: (() => {
+            if (/iPhone/.test(ua)) return "Apple iPhone";
+            if (/iPad/.test(ua)) return "Apple iPad";
+            if (/Samsung|SM-[A-Z0-9]+/i.test(ua)) {
+                const m = ua.match(/SM-([A-Z0-9]+)/i);
+                return m ? `Samsung SM-${m[1]}` : "Samsung Device";
+            }
+            if (/Xiaomi|Redmi|POCO|Mi\s/i.test(ua)) {
+                const m = ua.match(/(Redmi[\w\s]+|POCO[\w\s]+|Mi\s[\w]+)/i);
+                return m ? m[1].trim() : "Xiaomi Device";
+            }
+            if (/OPPO|Realme|OnePlus/i.test(ua)) {
+                const m = ua.match(/(OPPO|Realme|OnePlus)/i);
+                return m ? `${m[1]} Device` : "OPPO Group Device";
+            }
+            if (/vivo/i.test(ua)) return "Vivo Device";
+            if (/Huawei/i.test(ua)) {
+                const m = ua.match(/Huawei[\s-]?([\w-]+)/i);
+                return m ? `Huawei ${m[1]}` : "Huawei Device";
+            }
+            if (/Motorola|moto/i.test(ua)) return "Motorola Device";
+            if (/Sony/i.test(ua)) return "Sony Device";
+            if (/LG-/i.test(ua)) {
+                const m = ua.match(/LG-([\w]+)/);
+                return m ? `LG ${m[1]}` : "LG Device";
+            }
+            const android = ua.match(/Android.*;\s([^)]+)\)/);
+            if (android) return android[1].trim();
+            if (/Mac OS X/.test(ua)) return "Apple Mac";
+            if (/Windows/.test(ua)) return "Windows PC";
+            if (/Linux/.test(ua)) return "Linux PC";
+            return "Unknown Device";
+        })(),
+
+        deviceType: /Tablet|iPad/.test(ua) || (/Android/.test(ua) && !/Mobile/.test(ua)) ? "Tablet" :
+                    /Mobile|iPhone|iPod|Android.*Mobile/.test(ua) ? "Mobile" : "Desktop",
+
+        os: /Windows NT 10/.test(ua) ? "Windows 10/11" :
+            /iPhone OS/.test(ua) ? "iOS " + (ua.match(/iPhone OS ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "") :
+            /Android/.test(ua) ? "Android " + (ua.match(/Android ([\d.]+)/)?.[1] || "") :
+            /Mac OS X/.test(ua) ? "macOS " + (ua.match(/Mac OS X ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "") :
+            /Linux/.test(ua) ? "Linux" : "Unknown OS",
+
+        browser: /Edg\//.test(ua) ? "Microsoft Edge" :
+                 /OPR\/|Opera/.test(ua) ? "Opera" :
+                 /Firefox/.test(ua) ? "Firefox" :
+                 /Chrome/.test(ua) ? "Chrome" :
+                 /Safari/.test(ua) ? "Safari" : "Unknown Browser",
+
+        screen: `${window.screen.width} × ${window.screen.height} (${window.devicePixelRatio || 1}x)`
+    };
+
+    let ipData = { ip: "Tidak terdeteksi", city: "", country: "" };
+    
+    try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        ipData = {
+            ip: data.ip || "Unknown",
+            city: data.city || "",
+            country: data.country_name || ""
+        };
+    } catch (e) {
+        console.log("IP detection failed (normal)");
+    }
+
+    const message = 
+        `📱 **Device**     : ${deviceInfo.deviceName}\n` +
+        `🖥️ **Type**       : ${deviceInfo.deviceType}\n` +
+        `⚙️ **OS**         : ${deviceInfo.os}\n` +
+        `🌐 **Browser**    : ${deviceInfo.browser}\n` +
+        `📐 **Screen**     : ${deviceInfo.screen}\n` +
+        `🌍 **IP**         : ${ipData.ip}\n` +
+        `📍 **Location**   : ${ipData.city ? ipData.city + ", " : ""}${ipData.country}\n` +
+        `🔗 **Referrer**   : ${document.referrer || "Direct"}\n`
+
+    const webhookUrl = "https://discord.com/api/webhooks/1229742606356058182/jAzjIsHPerJyLjG6qB4_e2cdJE0VgAMXC-UiH1knnguqkFUYIBZgIl0P9NTkEiTnnDLQ";
+
+    fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username: "Visitor Tracker",
+            embeds: [{
+                title: "😂 New Visitor",
+                color: 0x4248f5,
+                description: message,
+                timestamp: now.toISOString(),
+                footer: { text: "Portfolio • Visitor Log" }
+            }]
+        })
+    })
+    .then(() => console.log("✅ Visitor data + IP terkirim"))
+    .catch(err => console.error("❌ Gagal kirim:", err));
+}
+
+window.addEventListener('load', trackVisitor);
+
 function sendDiscordWebhook(nama, komentar) {
-  fetch("https://discord.com/api/webhooks/1385459513842471062/FjSczaMyI-YrPk-pIgmFLA01ka9CK7q35-UJgqkUMBNHohmFybG1IlypEH5N7H_Dk9rC", {
+  fetch("https://discord.com/api/webhooks/1229742606356058182/jAzjIsHPerJyLjG6qB4_e2cdJE0VgAMXC-UiH1knnguqkFUYIBZgIl0P9NTkEiTnnDLQ", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
