@@ -133,7 +133,7 @@ const experiences = [
     {
         title: "National CAD-CAM Competition 2026",
         description: "Achieved 3rd place (Competent level) in the 3D Modelling category at the National CAD-CAM Competition 2026 held in Bandung, representing Politeknik Negeri Ujung Pandang. Demonstrated solid 3D modeling skills, design accuracy, and effective time management in a competitive national environment.",
-        image: "assets/images/lomba26.jpeg"
+        image: "assets/images/Lomba26.jpeg"
     },
     {
         title: "Sulsel Student CAD Competition Committee 2026",
