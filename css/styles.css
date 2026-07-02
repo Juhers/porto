@@ -516,6 +516,7 @@ section h2::after {
 }
 
 #modal-body p {
+    text-align: justify;
     color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: 14px;
@@ -1006,7 +1007,7 @@ button:hover {
     }
  
     .strengths-weaknesses-section {
-        text-align: left;
+        text-align: justify;
     }
  
     .strengths-weaknesses-section p {
@@ -1021,7 +1022,7 @@ button:hover {
 
 /* ── Mobile 700px ── */
 @media (max-width: 700px) {
-    .strengths-weaknesses-section { flex: 2; text-align: left; }
+    .strengths-weaknesses-section { flex: 2; text-align: justify; }
     header {
         padding-left: 0;
         padding-right: 0;
@@ -1413,3 +1414,31 @@ body.preload main, body.preload header, body.preload section { opacity: 0; }
 }
 
 #experience-lightbox .lightbox-close:hover { color: var(--accent-color); }
+
+.cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 30px;
+    padding: 13px 25px;
+    background: #00fdb562;
+    color: #060c08;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-size: 0.76rem;
+    box-shadow: 0 4px 20px rgba(0, 229, 160, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cv-download-btn i {
+    font-size: 0.85rem;
+}
+
+.cv-download-btn:hover {
+    background: #00fdb5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0, 229, 160, 0.4);
+}
