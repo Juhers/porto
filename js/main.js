@@ -33,6 +33,19 @@ const projects = [
         ]
     },
     {
+        title: "Robot Virtual Path Follower: Fuzzy-PID Hybrid Control",
+        description: "A control system for a differential-drive robot that follows a path drawn freehand with a mouse over a live camera feed. An overhead camera tracks the robot's position and heading in real time using ArUco markers. Steering combines Pure Pursuit with a Fuzzy-PID controller, whose gains are scheduled by Sugeno fuzzy logic, and adaptive speed control slows the robot before and during turns. Motor commands are sent to an ESP32 over WebSocket, with auto-reconnect and a fail-safe that stops the robot if the marker is lost.",
+        tools: "Solidworks, Arduino IDE, Python, OpenCV, ESP32, WebSocket",
+        modelPath: "assets/models/robot.glb",
+        details: "I designed the mechanical model, built the electrical system and schematics, wrote the ESP32 firmware, and developed the Python control software, including ArUco localization, path planning, Pure Pursuit, and the Fuzzy-PID controller.",
+        images: [
+            "assets/images/Slambengok (1).png",
+            "assets/images/Slambengok (2).png",
+            "assets/images/Slambengok (3).png",
+            "assets/images/Slambengok (4).png"
+        ]
+    },
+    {
         title: "Rice Planting Robot",
         description: "This rice planting robot is designed to assist in the process of transplanting rice seedlings. Currently, the robot is manually controlled via a remote control and operates using electrical power. In the future, it is planned to be fully automated using computer vision and machine learning technologies.",
         tools: "Autodesk Inventor",
@@ -97,6 +110,23 @@ const projects = [
         details: "I designed the 3D mechanical model of the Mini Dozer X Excavator Toy using Autodesk Inventor.",
         images: [
             "assets/images/mainan.png"
+        ]
+    },
+    {
+        title: "Bag Buddy Keychain",
+        description: "A smart keychain that shows the song playing on your iPhone over a custom animated GIF, and turns into a photo gallery when the music stops.",
+        tools: "Solidworks, Arduino IDE, ESP32-C3, Web Bluetooth",
+        modelPath: "assets/models/project_ganci.glb",
+        details: "Built on an ESP32-C3 Super Mini with a 240x240 ST7789 LCD and an SW-420 vibration sensor. " +
+                 "The firmware reads the iPhone's now-playing info (title, artist, time and progress bar) over BLE using Apple Media Service, and draws it flicker-free over a fullscreen GIF background. " +
+                 "When music is paused or absent, the keychain shows a photo slideshow instead. " +
+                 "I also built a Web Bluetooth uploader page for sending photos and GIFs to the device and changing 47 runtime settings, such as colors, fonts, brightness and slideshow behavior, without recompiling. " +
+                 "To save battery, the device enters deep sleep when idle and wakes on a validated vibration, and a stats tab tracks usage.",
+        images: [
+            "assets/images/Ganci (1).png",
+            "assets/images/Ganci (1).jpeg",
+            "assets/images/Ganci (2).jpeg",
+            "assets/images/Ganci (3).jpeg"
         ]
     },
     {
@@ -182,171 +212,6 @@ function finishLoading() {
         document.body.classList.remove("preload");
         document.body.classList.add("loaded");
     }, 500);
-}
-
-async function trackVisitor() {
-    const ua = navigator.userAgent;
-    const now = new Date();
-
-    const deviceInfo = {
-        deviceName: (() => {
-            if (/iPhone/.test(ua)) return "Apple iPhone";
-            if (/iPad/.test(ua)) return "Apple iPad";
-            if (/Samsung|SM-[A-Z0-9]+/i.test(ua)) {
-                const m = ua.match(/SM-([A-Z0-9]+)/i);
-                return m ? `Samsung SM-${m[1]}` : "Samsung Device";
-            }
-            if (/Xiaomi|Redmi|POCO|Mi\s/i.test(ua)) {
-                const m = ua.match(/(Redmi[\w\s]+|POCO[\w\s]+|Mi\s[\w]+)/i);
-                return m ? m[1].trim() : "Xiaomi Device";
-            }
-            if (/OPPO|Realme|OnePlus/i.test(ua)) {
-                const m = ua.match(/(OPPO|Realme|OnePlus)/i);
-                return m ? `${m[1]} Device` : "OPPO Group Device";
-            }
-            if (/vivo/i.test(ua)) return "Vivo Device";
-            if (/Huawei/i.test(ua)) {
-                const m = ua.match(/Huawei[\s-]?([\w-]+)/i);
-                return m ? `Huawei ${m[1]}` : "Huawei Device";
-            }
-            if (/Motorola|moto/i.test(ua)) return "Motorola Device";
-            if (/Sony/i.test(ua)) return "Sony Device";
-            if (/LG-/i.test(ua)) {
-                const m = ua.match(/LG-([\w]+)/);
-                return m ? `LG ${m[1]}` : "LG Device";
-            }
-            const android = ua.match(/Android.*;\s([^)]+)\)/);
-            if (android) return android[1].trim();
-            if (/Mac OS X/.test(ua)) return "Apple Mac";
-            if (/Windows/.test(ua)) return "Windows PC";
-            if (/Linux/.test(ua)) return "Linux PC";
-            return "Unknown Device";
-        })(),
-
-        deviceType: /Tablet|iPad/.test(ua) || (/Android/.test(ua) && !/Mobile/.test(ua)) ? "Tablet" :
-                    /Mobile|iPhone|iPod|Android.*Mobile/.test(ua) ? "Mobile" : "Desktop",
-
-        os: /Windows NT 10/.test(ua) ? "Windows 10/11" :
-            /iPhone OS/.test(ua) ? "iOS " + (ua.match(/iPhone OS ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "") :
-            /Android/.test(ua) ? "Android " + (ua.match(/Android ([\d.]+)/)?.[1] || "") :
-            /Mac OS X/.test(ua) ? "macOS " + (ua.match(/Mac OS X ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "") :
-            /Linux/.test(ua) ? "Linux" : "Unknown OS",
-
-        browser: /Edg\//.test(ua) ? "Microsoft Edge" :
-                 /OPR\/|Opera/.test(ua) ? "Opera" :
-                 /Firefox/.test(ua) ? "Firefox" :
-                 /Chrome/.test(ua) ? "Chrome" :
-                 /Safari/.test(ua) ? "Safari" : "Unknown Browser",
-
-        screen: `${window.screen.width} × ${window.screen.height} (${window.devicePixelRatio || 1}x)`
-    };
-
-    let ipData = { ip: "Tidak terdeteksi", city: "", country: "" };
-    
-    try {
-        const res = await fetch('https://ipapi.co/json/');
-        const data = await res.json();
-        ipData = {
-            ip: data.ip || "Unknown",
-            city: data.city || "",
-            country: data.country_name || ""
-        };
-    } catch (e) {
-        console.log("IP detection failed (normal)");
-    }
-
-    const message = 
-        `📱 **Device**     : ${deviceInfo.deviceName}\n` +
-        `🖥️ **Type**       : ${deviceInfo.deviceType}\n` +
-        `⚙️ **OS**         : ${deviceInfo.os}\n` +
-        `🌐 **Browser**    : ${deviceInfo.browser}\n` +
-        `📐 **Screen**     : ${deviceInfo.screen}\n` +
-        `🌍 **IP**         : ${ipData.ip}\n` +
-        `📍 **Location**   : ${ipData.city ? ipData.city + ", " : ""}${ipData.country}\n` +
-        `🔗 **Referrer**   : ${document.referrer || "Direct"}\n`
-
-    const webhookUrl = "https://discord.com/api/webhooks/1229742606356058182/jAzjIsHPerJyLjG6qB4_e2cdJE0VgAMXC-UiH1knnguqkFUYIBZgIl0P9NTkEiTnnDLQ";
-
-    fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            username: "Visitor Tracker",
-            embeds: [{
-                title: "😂 New Visitor",
-                color: 0x4248f5,
-                description: message,
-                timestamp: now.toISOString(),
-                footer: { text: "Portfolio • Visitor Log" }
-            }]
-        })
-    })
-}
-
-
-window.addEventListener('load', trackVisitor);
-
-function sendDiscordWebhook(nama, komentar) {
-  fetch("https://discord.com/api/webhooks/1229742606356058182/jAzjIsHPerJyLjG6qB4_e2cdJE0VgAMXC-UiH1knnguqkFUYIBZgIl0P9NTkEiTnnDLQ", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: "Portfolio Comments Bot",
-      embeds: [
-        {
-          title: "📬 New Portfolio Comment",
-          color: 0x00FF88,
-          fields: [
-            {
-              name: "👤 Name",
-              value: nama,
-              inline: true
-            },
-            {
-              name: "💬 Message",
-              value: komentar
-            },
-            {
-              name: "🕒 Time",
-              value: new Date().toLocaleString()
-            }
-          ],
-          footer: {
-            text: "Portfolio Comment Form"
-          }
-        }
-      ]
-    })
-  }).catch(console.error);
-}
-
-function sendMQTT(nama, komentar) {
-  const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt", {
-    clientId: "porto-" + Math.random().toString(16).slice(2, 10),
-    clean: true,
-    reconnectPeriod: 0,
-    connectTimeout: 4000
-  });
-
-  client.on("connect", () => {
-    const payload = JSON.stringify({
-      name: nama,
-      comment: komentar,
-      time: new Date().toLocaleString()
-    });
-
-    client.publish(
-      "IOT/PORTO/JUHERS/COMMENTS",
-      payload,
-      { qos: 0 },
-      () => client.end()
-    );
-  });
-
-  client.on("error", (err) => {
-    console.error("MQTT error:", err);
-    client.end();
-  });
 }
 
 function is3DModel(path) {
@@ -667,9 +532,6 @@ form.addEventListener("submit", async (e) => {
     method: "POST",
     body: JSON.stringify({ name, message })
   });
-
-  sendDiscordWebhook(realname, message);
-  sendMQTT(realname, message);
 
   form.reset();
   loadComments();
