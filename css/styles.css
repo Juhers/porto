@@ -1532,3 +1532,47 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
                 rgba(255, 255, 255, 0) 100%);
     }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PERFORMA HP / LAYAR SENTUH
+   backdrop-filter (blur) sangat berat untuk GPU HP, apalagi bila elemennya
+   ada di atas animasi (canvas 3D, orbit). Di HP diganti latar solid.
+   ═══════════════════════════════════════════════════════════ */
+#navbar.scrolled { backdrop-filter: blur(15px); }
+
+@media (max-width: 900px), (hover: none) {
+    #navbar.scrolled {
+        backdrop-filter: none;
+        background: rgba(10, 10, 12, 0.88) !important;
+    }
+
+    .viewer,
+    .skills li,
+    .project,
+    .modal,
+    .modal-content,
+    input, textarea,
+    .chat-input-panel,
+    .chat-messages-panel,
+    .comment-content,
+    .circle-btn,
+    .nav-links,
+    .experience-card {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+
+    .project,
+    .experience-card,
+    .chat-input-panel,
+    .chat-messages-panel { background: rgba(18, 18, 22, 0.96); }
+    .modal { background: rgba(0, 0, 0, 0.94); }
+    .nav-links { background: rgba(10, 10, 12, 0.98); }
+
+    /* Bayangan besar & drop-shadow ikut di-repaint saat animasi */
+    .float-card img { filter: none; }
+    .project, .experience-card { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35); }
+
+    /* Hover-lift tidak berguna di layar sentuh */
+    .experience-card:hover { transform: none; }
+}

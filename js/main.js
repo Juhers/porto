@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.className = 'experience-card';
 
         card.innerHTML = `
-            <img src="${exp.image}" alt="${exp.title}" class="experience-image">
+            <img src="${exp.image}" alt="${exp.title}" class="experience-image" loading="lazy" decoding="async">
             <div class="experience-content">
                 <h3>${exp.title}</h3>
                 <p>${exp.description}</p>
@@ -273,45 +273,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ================= VIEWER 3D OPTIMIZATION =================
-const viewers = document.querySelectorAll('.viewer');
-
-const viewerObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const el = entry.target;
-        const modelPath = el.dataset.model;
-
-        if (!modelPath) return;
-
-        if (entry.isIntersecting) {
-            // Jika visible → init viewer jika belum ada
-            if (!el.viewerInstance) {
-                // autoRotate pelan, non-interaktif di main page
-                el.viewerInstance = initViewer(el, modelPath, true, false);
-                if (el.viewerInstance) el.viewerInstance.autoRotateSpeed = 0.1; // pelan banget
-                console.log("✔ Viewer loaded:", modelPath);
-            }
-        } else {
-            // Jika tidak visible → dispose viewer jika ada
-            if (el.viewerInstance && el.viewerInstance.dispose) {
-                el.viewerInstance.dispose();
-                el.viewerInstance = null;
-                console.log("❌ Viewer disposed:", modelPath);
-            }
-        }
-    });
-}, {
-    threshold: 0.1 // 10% visible dianggap tampil
-});
-
-// Observe semua viewer
-viewers.forEach(v => viewerObserver.observe(v));
-
-
+// (Lazy-load & dispose viewer 3D kini ditangani di js/three-viewer.js)
 
 // Render Projects Dynamically
 const projectsContainer = document.getElementById('projects-container');
 projects.forEach((project, index) => {
+    let viewerHTML = '';
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
     projectDiv.setAttribute('data-index', index);
@@ -358,17 +325,16 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(section => observer.observe(section));
 
-// Navbar Sticky and Scroll Effect
+// Navbar Sticky and Scroll Effect (hanya ubah DOM saat status berubah)
+const navbarEl = document.getElementById('navbar');
+let navScrolled = false;
 window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'transparent';
-        navbar.style.backdropFilter = 'blur(15px)';
-    } else {
-        navbar.style.background = 'transparent';
-        navbar.style.backdropFilter = 'blur(0px)';
+    const now = window.scrollY > 50;
+    if (now !== navScrolled) {
+        navScrolled = now;
+        navbarEl.classList.toggle('scrolled', now);
     }
-});
+}, { passive: true });
 
 // NAVBAR HP
 const toggle = document.querySelector('.nav-toggle');
@@ -384,6 +350,14 @@ const modalViewer = document.getElementById('modal-3d-viewer');
 const modalBody = document.getElementById('modal-body');
 const closeModal = document.querySelector('.close-modal');
 let modalControls; // simpan controls modal secara global
+
+function closeProjectModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    // hentikan render loop & buang WebGL context viewer modal
+    if (modalControls) { modalControls.dispose(); modalControls = null; }
+    modalViewer.innerHTML = '';
+}
 
 
 const modalLeft = document.querySelector('.modal-left');
@@ -407,6 +381,7 @@ projectsContainer.addEventListener('click', (e) => {
         `;
 
         // Hapus viewer lama & init viewer baru
+        if (modalControls) { modalControls.dispose(); modalControls = null; }
         modalViewer.innerHTML = '';
 
         if (project.modelPath && is3DModel(project.modelPath)) {
@@ -424,7 +399,7 @@ projectsContainer.addEventListener('click', (e) => {
                 if (!isImage(img)) return;
 
                 modalViewer.innerHTML += `
-                <img src="${img}" class="modal-image">
+                <img src="${img}" class="modal-image" loading="lazy" decoding="async">
                 `;
             });
         }
@@ -436,19 +411,10 @@ projectsContainer.addEventListener('click', (e) => {
     }
 });
 
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scroll
-
-    // zoom nonaktif saat modal ditutup
-    if (modalControls) modalControls.enableZoom = false;
-});
+closeModal.addEventListener('click', closeProjectModal);
 
 window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    if (e.target === modal) closeProjectModal();
 });
 
 // ================= IMAGE LIGHTBOX =================
@@ -537,6 +503,8 @@ form.addEventListener("submit", async (e) => {
   loadComments();
 });
 
+const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
 async function loadComments() {
     const res = await fetch(API_URL);
     const data = await res.json();
@@ -565,10 +533,10 @@ async function loadComments() {
 
         return `
         <div class="comment ${side}">
-            <div class="avatar">${initials}</div>
+            <div class="avatar">${esc(initials)}</div>
             <div class="comment-content">
-            <strong>${realname}</strong>
-            <p>${c.message}</p>
+            <strong>${esc(realname)}</strong>
+            <p>${esc(c.message)}</p>
             <small>${new Date(c.time).toLocaleString()}</small>
             </div>
         </div>
